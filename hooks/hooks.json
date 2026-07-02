@@ -1,0 +1,12 @@
+{
+  "hooks": {
+    "SessionStart":     [{ "hooks": [{ "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}\"/skills/setup/scripts/mochi-hook" }] }],
+    "UserPromptSubmit": [{ "hooks": [{ "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}\"/skills/setup/scripts/mochi-hook" }] }],
+    "PreToolUse":       [{ "matcher": "*", "hooks": [{ "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}\"/skills/setup/scripts/mochi-hook" }] }],
+    "PostToolUse":      [{ "matcher": "*", "hooks": [{ "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}\"/skills/setup/scripts/mochi-hook" }] }],
+    "Notification":     [{ "hooks": [{ "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}\"/skills/setup/scripts/mochi-hook" }] }],
+    "Stop":             [{ "hooks": [{ "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}\"/skills/setup/scripts/mochi-hook" }] }],
+    "SubagentStop":     [{ "hooks": [{ "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}\"/skills/setup/scripts/mochi-hook" }] }],
+    "SessionEnd":       [{ "hooks": [{ "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}\"/skills/setup/scripts/mochi-hook" }] }]
+  }
+}

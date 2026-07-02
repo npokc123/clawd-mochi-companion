@@ -1,0 +1,56 @@
+{
+  "enabled": true,
+  "device": {
+    "host": "192.168.1.42",
+    "timeout_ms": 500
+  },
+  "log_file": "~/.cache/clawd-mochi.log",
+  "_notes": {
+    "expr":    "0=default, 1=tired, 2=angry, 3=happy",
+    "pos":     "0=center, 1=up, 2=up-right, 3=right, 4=down-right, 5=down, 6=down-left, 7=left, 8=up-left",
+    "flags":   "curious/sweat/idle/thinking = 1 or 0",
+    "caption": "text in thought bubble; empty string hides the bubble",
+    "shot":    "one-shot: blink | laugh | confused",
+    "_path":   "override default /robo (e.g. /backlight)"
+  },
+  "events": {
+    "SessionStart": {
+      "expr": 0, "curious": 0, "sweat": 0, "idle": 0, "thinking": 0, "caption": "", "shot": "blink"
+    },
+    "UserPromptSubmit": {
+      "expr": 0, "curious": 0, "sweat": 0, "idle": 0, "thinking": 1, "speed": 3, "caption": "Hmm..."
+    },
+
+    "PreToolUse": {
+      "default": { "expr": 0, "curious": 0, "sweat": 1, "idle": 1, "thinking": 0, "caption": "" },
+      "by_tool": {
+        "Bash":  { "expr": 0, "curious": 0, "sweat": 1, "idle": 1, "thinking": 0, "caption": "" },
+        "Edit":  { "expr": 0, "curious": 0, "sweat": 1, "idle": 1, "thinking": 0, "caption": "" },
+        "Write": { "expr": 0, "curious": 0, "sweat": 1, "idle": 1, "thinking": 0, "caption": "" },
+        "Read":  { "expr": 0, "curious": 1, "sweat": 0, "idle": 1, "thinking": 0, "caption": "" },
+        "Grep":  { "expr": 0, "curious": 1, "sweat": 0, "idle": 1, "thinking": 0, "caption": "" },
+        "Glob":  { "expr": 0, "curious": 1, "sweat": 0, "idle": 1, "thinking": 0, "caption": "" }
+      }
+    },
+    "PostToolUse": {
+      "expr": 0, "curious": 0, "sweat": 0, "idle": 1
+    },
+
+    "Notification": {
+      "expr": 0, "curious": 1, "sweat": 0, "idle": 0, "thinking": 1, "speed": 1, "caption": "?", "shot": "blink"
+    },
+    "Stop": {
+      "expr": 3, "curious": 0, "sweat": 0, "idle": 1, "thinking": 0, "caption": "", "shot": "laugh",
+      "reset_after_ms": 5000,
+      "reset": { "expr": 0 }
+    },
+    "SubagentStop": {
+      "expr": 3, "curious": 0, "sweat": 0, "idle": 1, "thinking": 0, "caption": "",
+      "reset_after_ms": 5000,
+      "reset": { "expr": 0 }
+    },
+    "SessionEnd": {
+      "expr": 1, "curious": 0, "sweat": 0, "idle": 1, "thinking": 0, "caption": ""
+    }
+  }
+}

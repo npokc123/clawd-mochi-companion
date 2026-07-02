@@ -1,0 +1,12 @@
+{
+  "name": "clawd-mochi",
+  "description": "Companion plugin for the Clawd Mochi desk robot.",
+  "owner": { "name": "Andrew Novikov" },
+  "plugins": [
+    {
+      "name": "mochi",
+      "source": "./",
+      "description": "Clawd Mochi desk companion — reacts to Claude Code hook events and shows the 5-hour limit bar."
+    }
+  ]
+}

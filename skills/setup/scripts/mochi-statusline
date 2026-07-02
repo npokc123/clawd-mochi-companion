@@ -1,0 +1,9 @@
+#!/bin/sh
+# Launcher for mochi-statusline.py: runs it with whatever Python this machine
+# has. macOS/Linux ship `python3`; Windows installs often expose only `python`
+# (python.org) or `py` (the launcher). Executes fine under Git Bash on Windows.
+dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+if command -v python3 >/dev/null 2>&1; then exec python3 "$dir/mochi-statusline.py" "$@"; fi
+if command -v python  >/dev/null 2>&1; then exec python  "$dir/mochi-statusline.py" "$@"; fi
+if command -v py      >/dev/null 2>&1; then exec py -3   "$dir/mochi-statusline.py" "$@"; fi
+exit 0 # no Python — swallow silently, the statusLine must never error
