@@ -1,7 +1,7 @@
 {
   "name": "mochi",
   "displayName": "Clawd Mochi",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Make a Clawd Mochi desk companion react to your Claude Code sessions — eye expressions on hook events, 5-hour limit bar from the status line.",
   "author": { "name": "Andrew Novikov" },
   "repository": "https://github.com/npokc123/clawd-mochi-companion",

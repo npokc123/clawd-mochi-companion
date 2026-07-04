@@ -10,6 +10,7 @@
     "pos":     "0=center, 1=up, 2=up-right, 3=right, 4=down-right, 5=down, 6=down-left, 7=left, 8=up-left",
     "flags":   "curious/sweat/idle/thinking = 1 or 0",
     "caption": "text in thought bubble; empty string hides the bubble",
+    "caption_from": "dynamic caption from hook payload: \"tool_input.query\" or {path, transform: 'host', max}",
     "shot":    "one-shot: blink | laugh | confused",
     "_path":   "override default /robo (e.g. /backlight)"
   },
@@ -29,11 +30,20 @@
         "Write": { "expr": 0, "curious": 0, "sweat": 1, "idle": 1, "thinking": 0, "caption": "" },
         "Read":  { "expr": 0, "curious": 1, "sweat": 0, "idle": 1, "thinking": 0, "caption": "" },
         "Grep":  { "expr": 0, "curious": 1, "sweat": 0, "idle": 1, "thinking": 0, "caption": "" },
-        "Glob":  { "expr": 0, "curious": 1, "sweat": 0, "idle": 1, "thinking": 0, "caption": "" }
+        "Glob":  { "expr": 0, "curious": 1, "sweat": 0, "idle": 1, "thinking": 0, "caption": "" },
+
+        "WebSearch": { "expr": 0, "curious": 1, "sweat": 0, "idle": 0, "thinking": 0, "pos": 2, "caption": "www?",
+                       "caption_from": { "path": "tool_input.query", "max": 10 } },
+        "WebFetch":  { "expr": 0, "curious": 1, "sweat": 0, "idle": 0, "thinking": 0, "pos": 5, "caption": "web..",
+                       "caption_from": { "path": "tool_input.url", "transform": "host", "max": 10 } }
       }
     },
     "PostToolUse": {
-      "expr": 0, "curious": 0, "sweat": 0, "idle": 1
+      "default": { "expr": 0, "curious": 0, "sweat": 0, "idle": 1 },
+      "by_tool": {
+        "WebSearch": { "expr": 0, "curious": 0, "sweat": 0, "idle": 1, "pos": 0, "caption": "" },
+        "WebFetch":  { "expr": 0, "curious": 0, "sweat": 0, "idle": 1, "pos": 0, "caption": "" }
+      }
     },
 
     "Notification": {

@@ -30,7 +30,7 @@ from urllib.request import ProxyHandler, build_opener
 # and no proxy can reach a LAN-only device.
 DIRECT = build_opener(ProxyHandler({}))
 
-RESERVED_KEYS = {"_path", "reset_after_ms", "reset"}
+RESERVED_KEYS = {"_path", "reset_after_ms", "reset", "caption_from"}
 
 DEFAULT_CONFIG = Path.home() / ".config" / "clawd-mochi" / "config.json"
 CONFIG_PATH = Path(os.environ.get("CLAWD_MOCHI_CONFIG") or DEFAULT_CONFIG)
@@ -57,6 +57,41 @@ def resolve_mapping(cfg: dict, event: str, payload: dict) -> dict | None:
             return by_tool[tool]
         return entry.get("default")
     return entry
+
+
+def apply_caption_from(mapping: dict, payload: dict) -> dict:
+    """Resolve a dynamic caption ("caption_from") from the hook payload.
+
+    Spec: a dotted-path string ("tool_input.query") or an object
+    {"path": ..., "transform": "host", "max": 10}. The device has a single
+    Latin font and a ~10-char thought bubble, so the text is reduced to
+    printable ASCII and truncated; when nothing survives, the entry's static
+    "caption" stays as the fallback.
+    """
+    spec = mapping.get("caption_from")
+    if not spec:
+        return mapping
+    if isinstance(spec, str):
+        spec = {"path": spec}
+    value = payload
+    for part in str(spec.get("path", "")).split("."):
+        value = value.get(part) if isinstance(value, dict) else None
+    text = str(value) if value else ""
+    if spec.get("transform") == "host":
+        host = urlsplit(text).hostname or ""
+        text = host[4:] if host.startswith("www.") else host
+    text = "".join(ch if 32 <= ord(ch) < 127 else " " for ch in text)
+    text = " ".join(text.split())
+    try:
+        max_len = int(spec.get("max", 10))
+    except (TypeError, ValueError):
+        max_len = 10
+    if len(text) > max_len:
+        text = text[:max_len].rstrip() + ".."
+    out = {k: v for k, v in mapping.items() if k != "caption_from"}
+    if text:
+        out["caption"] = text
+    return out
 
 
 def build_url(host: str, mapping: dict) -> str:
@@ -152,6 +187,7 @@ def main() -> int:
     if not mapping:
         log(cfg, f"{event} tool={payload.get('tool_name','-')} -> (no mapping)")
         return 0
+    mapping = apply_caption_from(mapping, payload)
 
     url = build_url(host, mapping)
     log(cfg, f"{event} tool={payload.get('tool_name','-')} -> {url}")

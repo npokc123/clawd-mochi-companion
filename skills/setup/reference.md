@@ -53,6 +53,14 @@ Per-entry optional fields (work in any leaf, incl. `by_tool` branches):
 - `reset` — the mapping for that follow-up (same shape; `_path` supported).
   Keep it minimal — only override fields the primary set, so a later event that
   lands meanwhile is not clobbered.
+- `caption_from` — build `caption` dynamically from the hook payload. Either a
+  dotted-path string (`"tool_input.query"`) or an object: `path` (dotted
+  lookup into the payload), `transform: "host"` (URL → bare hostname, `www.`
+  stripped), `max` (default 10; longer text truncated with a `..` suffix).
+  Non-ASCII is dropped — the firmware has a single Latin font; if nothing
+  survives, the entry's static `caption` is the fallback. Example: the
+  template's `WebSearch` entry puts the live search query into the thought
+  bubble, `WebFetch` shows the fetched host.
 
 `/robo` params (see also the firmware `/robo` route):
 - `expr`: 0=default, 1=tired, 2=angry, 3=happy
