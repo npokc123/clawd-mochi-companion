@@ -58,9 +58,11 @@ Per-entry optional fields (work in any leaf, incl. `by_tool` branches):
   lookup into the payload), `transform: "host"` (URL → bare hostname, `www.`
   stripped), `max` (default 10; longer text truncated with a `..` suffix).
   Non-ASCII is dropped — the firmware has a single Latin font; if nothing
-  survives, the entry's static `caption` is the fallback. Example: the
-  template's `WebSearch` entry puts the live search query into the thought
-  bubble, `WebFetch` shows the fetched host.
+  survives, the entry's static `caption` is the fallback. The template ships
+  static captions (`googling..`/`reading...`); `caption_from` is opt-in — e.g.
+  `"caption_from": {"path": "tool_input.query", "max": 10}` in the `WebSearch`
+  entry shows the live search query, `{"path": "tool_input.url", "transform":
+  "host"}` in `WebFetch` shows the fetched host.
 
 `/robo` params (see also the firmware `/robo` route):
 - `expr`: 0=default, 1=tired, 2=angry, 3=happy

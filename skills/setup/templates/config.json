@@ -32,10 +32,8 @@
         "Grep":  { "expr": 0, "curious": 1, "sweat": 0, "idle": 1, "thinking": 0, "caption": "" },
         "Glob":  { "expr": 0, "curious": 1, "sweat": 0, "idle": 1, "thinking": 0, "caption": "" },
 
-        "WebSearch": { "expr": 0, "curious": 1, "sweat": 0, "idle": 0, "thinking": 0, "pos": 2, "caption": "www?",
-                       "caption_from": { "path": "tool_input.query", "max": 10 } },
-        "WebFetch":  { "expr": 0, "curious": 1, "sweat": 0, "idle": 0, "thinking": 0, "pos": 5, "caption": "web..",
-                       "caption_from": { "path": "tool_input.url", "transform": "host", "max": 10 } }
+        "WebSearch": { "expr": 0, "curious": 1, "sweat": 0, "idle": 0, "thinking": 0, "pos": 2, "caption": "googling.." },
+        "WebFetch":  { "expr": 0, "curious": 1, "sweat": 0, "idle": 0, "thinking": 0, "pos": 5, "caption": "reading..." }
       }
     },
     "PostToolUse": {
