@@ -72,7 +72,7 @@ class DefaultTable(unittest.TestCase):
         self.assertIsNone(event("Notification"))
 
     def test_stop_and_subagents(self):
-        self.assertEqual(event("Stop"), {"reaction": "success"})
+        self.assertEqual(event("Stop"), {"state": "idle", "reaction": "success"})
         self.assertEqual(event("SubagentStart"), {"state": "working"})
         self.assertIsNone(event("SubagentStop"))
 

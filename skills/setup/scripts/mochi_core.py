@@ -70,7 +70,9 @@ DEFAULT_EVENTS: dict = {
         },
         "default": None,
     },
-    "Stop": {"reaction": "success"},
+    # idle, not just success: the last PostToolUse left `thinking`, which would
+    # otherwise keep "thinking" on screen for T1 (60 s) after the reply is done.
+    "Stop": {"state": "idle", "reaction": "success"},
     "StopFailure": {"reaction": "error"},
     "SubagentStart": {"state": "working"},
     "SubagentStop": None,

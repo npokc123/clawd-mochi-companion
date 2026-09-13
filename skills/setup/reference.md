@@ -73,7 +73,7 @@ Built into `mochi_core.DEFAULT_EVENTS` (SPEC §8.3):
 | `PostToolUseFailure`, `StopFailure` | reaction `error` |
 | `Notification` `permission_prompt`, `elicitation_dialog`, `elicitation_url_dialog`, `agent_needs_input` | state `waiting_user` |
 | `Notification` other types | — |
-| `Stop` | reaction `success` |
+| `Stop` | state `idle` + reaction `success` (without `idle` the last `thinking` would stay for 60 s) |
 | `SubagentStart` | state `working` |
 | `SubagentStop` | — |
 | `SessionEnd` | state `sleeping` (the device applies it only for the Active session) |

@@ -125,7 +125,8 @@ it should play `success`. Then tell the user, concisely:
 - the host that was wired in, and that the smoke test fired;
 - hooks follow plugin updates; the statusLine bridge is a copy — re-run
   `/mochi:setup` after an update;
-- hooks and statusLine apply to **new** Claude Code sessions;
+- hooks apply to new sessions; an already open session needs
+  `/reload-plugins` (until then it keeps the hooks of the previous install);
 - toggles: `export CLAWD_MOCHI_DISABLED=1`, `"enabled": false`,
   `"statusline": {"enabled": false}`; custom mapping — `events` in the config
   (reference.md).
