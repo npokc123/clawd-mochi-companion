@@ -2,7 +2,7 @@
 # Example Claude Code statusLine command for Clawd Mochi.
 #
 # It does two things:
-#   1. Forwards the 5-hour usage to Mochi's limit bar (fire-and-forget).
+#   1. Forwards the 5-hour and weekly usage to Mochi's limit bars (fire-and-forget).
 #   2. Prints a minimal status line.
 #
 # If you already have a statusline-command.sh, you do NOT need this file —
@@ -15,10 +15,9 @@
 
 input=$(cat)
 
-# ── forward 5h usage to Mochi (non-blocking) ────────────────────────────────
+# ── forward usage limits to Mochi (non-blocking) ────────────────────────────
 # The bridge is installed by /mochi:setup. The trailing & keeps the prompt
-# snappy; the bridge also detaches its own HTTP worker, so this is doubly
-# non-blocking.
+# snappy; the bridge also detaches its own HTTP worker.
 printf '%s' "$input" | "$HOME/.config/clawd-mochi/bin/mochi-statusline" &
 
 # ── your status line (replace with whatever you like) ───────────────────────
