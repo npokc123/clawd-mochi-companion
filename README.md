@@ -13,7 +13,18 @@ it — rapid tool calls never turn into a strobe.
 
 This version talks only to the S3 firmware
 ([clawd-mochi-s3](https://github.com/npokc123/clawd-mochi-s3)). For the older
-ESP32-C3 device use plugin 1.x from the `main` branch.
+ESP32-C3 device use plugin 1.x: the legacy branch
+[`c3`](https://github.com/npokc123/clawd-mochi-companion/tree/c3) (tag
+`v1.1.1`, frozen). Install it from a local clone:
+
+```
+git clone -b c3 https://github.com/npokc123/clawd-mochi-companion clawd-mochi-c3
+/plugin marketplace add /path/to/clawd-mochi-c3
+/plugin install mochi@clawd-mochi
+```
+
+Both use the marketplace name `clawd-mochi`, so only one can be installed at
+a time.
 
 ## Requirements
 
